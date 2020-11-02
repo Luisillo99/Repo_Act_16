@@ -17,12 +17,16 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(402, 552)
+        MainWindow.resize(397, 565)
+        self.actionAbrir = QAction(MainWindow)
+        self.actionAbrir.setObjectName(u"actionAbrir")
+        self.actionGuardar = QAction(MainWindow)
+        self.actionGuardar.setObjectName(u"actionGuardar")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.groupBox = QGroupBox(self.centralwidget)
         self.groupBox.setObjectName(u"groupBox")
-        self.groupBox.setGeometry(QRect(20, 19, 191, 271))
+        self.groupBox.setGeometry(QRect(20, 9, 191, 271))
         self.groupBox.setFlat(False)
         self.groupBox.setCheckable(False)
         self.label_2 = QLabel(self.groupBox)
@@ -75,7 +79,7 @@ class Ui_MainWindow(object):
         self.id.setMaximum(99999)
         self.groupBox_2 = QGroupBox(self.centralwidget)
         self.groupBox_2.setObjectName(u"groupBox_2")
-        self.groupBox_2.setGeometry(QRect(20, 290, 191, 241))
+        self.groupBox_2.setGeometry(QRect(20, 280, 191, 241))
         self.red = QSpinBox(self.groupBox_2)
         self.red.setObjectName(u"red")
         self.red.setGeometry(QRect(80, 20, 81, 21))
@@ -113,15 +117,21 @@ class Ui_MainWindow(object):
         self.mostrar_button.setGeometry(QRect(20, 200, 151, 23))
         self.plainTextEdit = QPlainTextEdit(self.centralwidget)
         self.plainTextEdit.setObjectName(u"plainTextEdit")
-        self.plainTextEdit.setGeometry(QRect(230, 20, 151, 511))
+        self.plainTextEdit.setGeometry(QRect(230, 10, 151, 511))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 402, 21))
+        self.menubar.setGeometry(QRect(0, 0, 397, 21))
+        self.menuAbrir = QMenu(self.menubar)
+        self.menuAbrir.setObjectName(u"menuAbrir")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
+        self.menubar.addAction(self.menuAbrir.menuAction())
+        self.menuAbrir.addAction(self.actionAbrir)
+        self.menuAbrir.addAction(self.actionGuardar)
 
         self.retranslateUi(MainWindow)
 
@@ -130,6 +140,14 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.actionAbrir.setText(QCoreApplication.translate("MainWindow", u"Abrir", None))
+#if QT_CONFIG(shortcut)
+        self.actionAbrir.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+A", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionGuardar.setText(QCoreApplication.translate("MainWindow", u"Guardar", None))
+#if QT_CONFIG(shortcut)
+        self.actionGuardar.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+S", None))
+#endif // QT_CONFIG(shortcut)
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Part\u00edculas", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Origen (X)", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Destino (Y)", None))
@@ -145,5 +163,6 @@ class Ui_MainWindow(object):
         self.agregar_inicio_button.setText(QCoreApplication.translate("MainWindow", u"Agregar Inicio", None))
         self.agregar_final_button.setText(QCoreApplication.translate("MainWindow", u"Agregar Final", None))
         self.mostrar_button.setText(QCoreApplication.translate("MainWindow", u"Mostrar", None))
+        self.menuAbrir.setTitle(QCoreApplication.translate("MainWindow", u"Archivo", None))
     # retranslateUi
 
