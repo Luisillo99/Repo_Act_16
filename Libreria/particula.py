@@ -44,3 +44,35 @@ class Particula:
                 'blue':self.__blue,
             }
         )
+
+    @property
+    def id(self):
+        return self.__id
+    @property
+    def or_x(self):
+        return self.__origen_x
+    @property
+    def or_y(self):
+        return self.__origen_y
+    @property
+    def de_x(self):
+        return self.__destino_x
+    @property
+    def de_y(self):
+        return self.__destino_y
+    @property
+    def vel(self):
+        return self.__velocidad
+    @property
+    def dis(self):
+        return self.__distancia
+    @property
+    def red(self):
+        return self.__red
+    @property
+    def green(self):
+        return self.__green
+    @property
+    def blue(self):
+        return self.__blue
+        
