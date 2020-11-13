@@ -1,11 +1,13 @@
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
-from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem,QGraphicsScene
+from PySide2.QtGui import QPen, QColor, QTransform
 from PySide2.QtCore import Slot
 from ui_main_window import Ui_MainWindow
 from Libreria.particula import Particula
 from Libreria.organizador import Organizador
+from random import randint
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -13,6 +15,10 @@ class MainWindow(QMainWindow):
         self.organizador = Organizador()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.scene = QGraphicsScene()
+        self.ui.graficos.setScene(self.scene)
+        self.ui.graficos.scale(0.85, 0.85)
         self.ui.agregar_inicio_button.clicked.connect(self.agregar_ini)
         self.ui.agregar_final_button.clicked.connect(self.agregar_fin)
         self.ui.mostrar_button.clicked.connect(self.mostrar)
@@ -20,7 +26,48 @@ class MainWindow(QMainWindow):
         self.ui.actionGuardar.triggered.connect(self.guardar_archivo)
         self.ui.buscar_button.clicked.connect(self.buscar)
         self.ui.mostrar_tabla_button.clicked.connect(self.mostrar_tabla)
-    
+        self.ui.dibujar_button.clicked.connect(self.dibujar)
+        self.ui.limpiar_button.clicked.connect(self.limpiar)
+        self.ui.generar_button.clicked.connect(self.generar)
+
+    def wheelEvent(self, event):
+        if event.delta() > 0:
+            self.ui.graficos.scale(1.1, 1.1)
+        else:
+            self.ui.graficos.scale(0.9, 0.9)
+
+    @Slot()
+    def dibujar(self):
+        pen = QPen()
+        pen.setWidth(3)
+        self.scene.addLine(-10,-10,-10,510,pen)
+        self.scene.addLine(-10,-10,510,-10,pen)
+        self.scene.addLine(510,-10,510,510,pen)
+        self.scene.addLine(-10,510,510,510,pen)
+        pen.setWidth(2)
+        for i in self.organizador:
+            color = QColor(i.red,i.green,i.blue)   
+            pen.setColor(color)
+            self.scene.addEllipse(i.or_x , i.or_y, 5, 5, pen)
+            self.scene.addEllipse(i.de_x , i.de_y, 5, 5, pen)
+            self.scene.addLine(i.or_x,i.or_y,i.de_x,i.de_y, pen)
+
+    @Slot()
+    def limpiar(self):
+        self.scene.clear()
+
+    @Slot()
+    def generar(self):
+        self.ui.id.setValue((randint(0,9)*10000)+(randint(0,9)*1000)+(randint(0,9)*100)+(randint(0,9)*10)+randint(0,9))        
+        self.ui.origen_X.setValue(randint(0, 500))
+        self.ui.origen_y.setValue(randint(0, 500))
+        self.ui.destino_x.setValue(randint(0, 500))
+        self.ui.destino_y.setValue(randint(0, 500))
+        self.ui.vel.setValue(randint(0, 200))
+        self.ui.red.setValue(randint(0, 255))
+        self.ui.green.setValue(randint(0, 255))
+        self.ui.blue.setValue(randint(0, 225))
+        
     @Slot()
     def buscar(self):
         key = int(self.ui.buscar_line_edit.text())

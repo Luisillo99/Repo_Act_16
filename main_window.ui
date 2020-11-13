@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>558</height>
+    <width>699</width>
+    <height>647</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,12 +19,12 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>711</width>
-      <height>521</height>
+      <width>701</width>
+      <height>601</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Agregar">
      <attribute name="title">
@@ -39,7 +39,7 @@
         <x>220</x>
         <y>20</y>
         <width>461</width>
-        <height>461</height>
+        <height>541</height>
        </rect>
       </property>
      </widget>
@@ -49,7 +49,7 @@
         <x>10</x>
         <y>10</y>
         <width>191</width>
-        <height>226</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="title">
@@ -240,9 +240,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>242</y>
+        <y>292</y>
         <width>191</width>
-        <height>241</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="title">
@@ -384,6 +384,19 @@
         <string>Mostrar</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="generar_button">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>230</y>
+         <width>151</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Generar</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="Tabla">
@@ -396,7 +409,7 @@
         <x>10</x>
         <y>10</y>
         <width>671</width>
-        <height>421</height>
+        <height>501</height>
        </rect>
       </property>
      </widget>
@@ -404,7 +417,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>450</y>
+        <y>530</y>
         <width>451</width>
         <height>21</height>
        </rect>
@@ -417,7 +430,7 @@
       <property name="geometry">
        <rect>
         <x>480</x>
-        <y>450</y>
+        <y>530</y>
         <width>91</width>
         <height>23</height>
        </rect>
@@ -430,13 +443,54 @@
       <property name="geometry">
        <rect>
         <x>590</x>
-        <y>450</y>
+        <y>530</y>
         <width>91</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Mostrar</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Graficos">
+     <attribute name="title">
+      <string>Gráficos</string>
+     </attribute>
+     <widget class="QGraphicsView" name="graficos">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>671</width>
+        <height>501</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="dibujar_button">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>530</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dibujar</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="limpiar_button">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>530</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Limpiar</string>
       </property>
      </widget>
     </widget>
@@ -447,7 +501,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>696</width>
+     <width>699</width>
      <height>21</height>
     </rect>
    </property>
