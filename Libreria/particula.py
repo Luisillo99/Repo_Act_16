@@ -29,6 +29,9 @@ class Particula:
             'Blue: '+str(self.__blue)+'\n'
             'Distancia: '+str(self.__distancia)+'\n'
         )
+    
+    def __lt__(self, other):
+        return self.__id < other.__id
 
     def to_dict(self):
         return ( 

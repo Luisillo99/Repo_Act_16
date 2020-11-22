@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Agregar">
      <attribute name="title">
@@ -409,7 +409,7 @@
         <x>10</x>
         <y>10</y>
         <width>671</width>
-        <height>501</height>
+        <height>481</height>
        </rect>
       </property>
      </widget>
@@ -417,7 +417,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>530</y>
+        <y>510</y>
         <width>451</width>
         <height>21</height>
        </rect>
@@ -430,7 +430,7 @@
       <property name="geometry">
        <rect>
         <x>480</x>
-        <y>530</y>
+        <y>510</y>
         <width>91</width>
         <height>23</height>
        </rect>
@@ -443,13 +443,52 @@
       <property name="geometry">
        <rect>
         <x>590</x>
-        <y>530</y>
+        <y>510</y>
         <width>91</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Mostrar</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="id_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>550</y>
+        <width>31</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Id</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="distancia_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>550</y>
+        <width>61</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Distancia</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="velocidad_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>550</y>
+        <width>71</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Velocidad</string>
       </property>
      </widget>
     </widget>

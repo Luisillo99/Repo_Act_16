@@ -11,7 +11,7 @@ class Organizador:
         return ''.join(
             str(i) + '\n' for i in self.__org
         )
-    
+
     def __len__(self):
         return (len(self.__org))
 
@@ -26,6 +26,14 @@ class Organizador:
             return part
         else:
             raise StopIteration
+
+    def orden(self, as_des, atributo):
+        if atributo == "id":
+            self.__org.sort(key=lambda particula: particula.id, reverse=as_des)
+        if atributo == "dis":
+            self.__org.sort(key=lambda particula: particula.dis, reverse=as_des)
+        if atributo == "vel":
+            self.__org.sort(key=lambda particula: particula.vel, reverse=as_des)
 
     def agregar_inicio(self,part):
         self.__org.insert(0,part)

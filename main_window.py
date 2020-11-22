@@ -1,7 +1,7 @@
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
-from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem,QGraphicsScene
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene
 from PySide2.QtGui import QPen, QColor, QTransform
 from PySide2.QtCore import Slot
 from ui_main_window import Ui_MainWindow
@@ -29,12 +29,36 @@ class MainWindow(QMainWindow):
         self.ui.dibujar_button.clicked.connect(self.dibujar)
         self.ui.limpiar_button.clicked.connect(self.limpiar)
         self.ui.generar_button.clicked.connect(self.generar)
+        self.ui.id_checkbox.stateChanged.connect(self.ordenar_id)
+        self.ui.velocidad_checkbox.stateChanged.connect(self.ordenar_vel)
+        self.ui.distancia_checkbox.stateChanged.connect(self.ordenar_dis)
 
     def wheelEvent(self, event):
         if event.delta() > 0:
             self.ui.graficos.scale(1.1, 1.1)
         else:
             self.ui.graficos.scale(0.9, 0.9)
+
+    @Slot()
+    def ordenar_id(self):
+        if self.ui.id_checkbox.isChecked():
+            self.ui.velocidad_checkbox.setChecked(False)
+            self.ui.distancia_checkbox.setChecked(False)
+            self.organizador.orden(False,"id")
+
+    @Slot()
+    def ordenar_dis(self):
+        if self.ui.distancia_checkbox.isChecked():
+            self.ui.velocidad_checkbox.setChecked(False)
+            self.ui.id_checkbox.setChecked(False)
+            self.organizador.orden(True,"dis")
+
+    @Slot()
+    def ordenar_vel(self):
+        if self.ui.velocidad_checkbox.isChecked():
+            self.ui.distancia_checkbox.setChecked(False)
+            self.ui.id_checkbox.setChecked(False)
+            self.organizador.orden(False,"vel")
 
     @Slot()
     def dibujar(self):
@@ -171,6 +195,7 @@ class MainWindow(QMainWindow):
         blu = self.ui.blue.value()
         part = Particula(Id,or_x,or_y,ds_x,ds_y,vel,red,grn,blu)
         self.organizador.agregar_inicio(part)
+
     @Slot()
     def agregar_fin(self):
         Id = self.ui.id.value()
