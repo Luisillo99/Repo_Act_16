@@ -1,9 +1,9 @@
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
-from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene
-from PySide2.QtGui import QPen, QColor, QTransform
-from PySide2.QtCore import Slot
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene, QGraphicsTextItem, QGraphicsItem
+from PySide2.QtGui import QPen, QColor, QTransform, QBrush, QFont
+from PySide2.QtCore import Slot, Qt
 from ui_main_window import Ui_MainWindow
 from Libreria.particula import Particula
 from Libreria.organizador import Organizador
@@ -15,23 +15,30 @@ class MainWindow(QMainWindow):
         self.organizador = Organizador()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
         self.scene = QGraphicsScene()
         self.ui.graficos.setScene(self.scene)
-        self.ui.graficos.scale(0.85, 0.85)
+
         self.ui.agregar_inicio_button.clicked.connect(self.agregar_ini)
         self.ui.agregar_final_button.clicked.connect(self.agregar_fin)
         self.ui.mostrar_button.clicked.connect(self.mostrar)
-        self.ui.actionAbrir.triggered.connect(self.abrir_archivo)
-        self.ui.actionGuardar.triggered.connect(self.guardar_archivo)
         self.ui.buscar_button.clicked.connect(self.buscar)
         self.ui.mostrar_tabla_button.clicked.connect(self.mostrar_tabla)
         self.ui.dibujar_button.clicked.connect(self.dibujar)
         self.ui.limpiar_button.clicked.connect(self.limpiar)
         self.ui.generar_button.clicked.connect(self.generar)
+
+        self.ui.actionAbrir.triggered.connect(self.abrir_archivo)
+        self.ui.actionGuardar.triggered.connect(self.guardar_archivo)
+        self.ui.actionGrafo.triggered.connect(self.generar_grafo)
+
         self.ui.id_checkbox.stateChanged.connect(self.ordenar_id)
         self.ui.velocidad_checkbox.stateChanged.connect(self.ordenar_vel)
         self.ui.distancia_checkbox.stateChanged.connect(self.ordenar_dis)
+
+    def generar_grafo(self):
+        self.ui.plainTextEdit.clear()
+        self.ui.plainTextEdit.insertPlainText("Grafo (Lista de Adyacencia): \n")
+        self.ui.plainTextEdit.insertPlainText(self.organizador.grafo())
 
     def wheelEvent(self, event):
         if event.delta() > 0:
@@ -63,18 +70,25 @@ class MainWindow(QMainWindow):
     @Slot()
     def dibujar(self):
         pen = QPen()
+        brush = QBrush()
         pen.setWidth(3)
-        self.scene.addLine(-10,-10,-10,510,pen)
-        self.scene.addLine(-10,-10,510,-10,pen)
-        self.scene.addLine(510,-10,510,510,pen)
-        self.scene.addLine(-10,510,510,510,pen)
-        pen.setWidth(2)
+        
         for i in self.organizador:
-            color = QColor(i.red,i.green,i.blue)   
+            color = QColor(i.red,i.green,i.blue)  
+            brush.setStyle(Qt.SolidPattern) 
+            brush.setColor(color)
             pen.setColor(color)
-            self.scene.addEllipse(i.or_x , i.or_y, 5, 5, pen)
-            self.scene.addEllipse(i.de_x , i.de_y, 5, 5, pen)
-            self.scene.addLine(i.or_x,i.or_y,i.de_x,i.de_y, pen)
+
+            self.scene.addEllipse(i.or_x , i.or_y, 7, 7 , pen, brush)
+            self.scene.addEllipse(i.de_x , i.de_y, 7, 7, pen, brush)
+            self.scene.addLine((i.or_x)+3.5, (i.or_y)+3.5, (i.de_x)+3.5, (i.de_y)+3.5, pen)
+
+        for keys in self.organizador.grafo_dic:
+            text = QGraphicsTextItem(str(keys))
+            text.setFlag(QGraphicsItem.ItemIsMovable)
+            text.setFont(QFont("TimesNewRoman",12,QFont.ExtraBold))
+            self.scene.addItem(text)
+            text.setPos(keys[0], keys[1])
 
     @Slot()
     def limpiar(self):
@@ -156,6 +170,7 @@ class MainWindow(QMainWindow):
                 "Operación Exitosa",
                 "El archivo se abrió con éxito desde la direccion: \n" + ubicacion
             )
+            self.organizador.borrar_grafo()
         else:
             QMessageBox.critical(
                 self,

@@ -3,9 +3,11 @@
 # pylint: disable=missing-function-docstring
 import json
 from .particula import Particula
+from pprint import pformat
 class Organizador:
     def __init__(self):
         self.__org = []
+        self.grafo_dic = dict()
 
     def __str__(self):
         return ''.join(
@@ -63,3 +65,28 @@ class Organizador:
             return 1
         except:
             return 0
+
+    def grafo(self):
+        for part in self.__org:
+            origen = (part.or_x, part.or_y)
+            destino = (part.de_x, part.de_y)
+            if origen in self.grafo_dic:
+                if destino in self.grafo_dic[origen]:
+                    pass
+                else:
+                    self.grafo_dic[origen].append((destino,round(part.dis,2)))
+            else:
+                self.grafo_dic[origen] = [(destino,round(part.dis,2))]
+            
+            if destino in self.grafo_dic:
+                if origen in self.grafo_dic[destino]:
+                    pass
+                else:
+                    self.grafo_dic[destino].append((origen,round(part.dis,2)))
+            else:
+                self.grafo_dic[destino] = [(origen,round(part.dis,2))]
+        string = pformat(self.grafo_dic, width=40) 
+        return(string)
+    
+    def borrar_grafo(self):
+        self.grafo_dic.clear()
