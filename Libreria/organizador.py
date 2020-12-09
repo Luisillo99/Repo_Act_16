@@ -71,7 +71,7 @@ class Organizador:
             origen = (part.or_x, part.or_y)
             destino = (part.de_x, part.de_y)
             if origen in self.grafo_dic:
-                if destino in self.grafo_dic[origen]:
+                if (destino,round(part.dis,2)) in self.grafo_dic[origen]:
                     pass
                 else:
                     self.grafo_dic[origen].append((destino,round(part.dis,2)))
@@ -79,7 +79,7 @@ class Organizador:
                 self.grafo_dic[origen] = [(destino,round(part.dis,2))]
             
             if destino in self.grafo_dic:
-                if origen in self.grafo_dic[destino]:
+                if (origen,round(part.dis,2)) in self.grafo_dic[destino]:
                     pass
                 else:
                     self.grafo_dic[destino].append((origen,round(part.dis,2)))
@@ -90,3 +90,52 @@ class Organizador:
     
     def borrar_grafo(self):
         self.grafo_dic.clear()
+
+    def profundidad(self, ini_x, ini_y):
+        try:
+            vertice = (ini_x,ini_y)
+            visitados = []
+            pila = []
+            recorrido = []
+            visitados.append(vertice)
+            pila.append(vertice)
+            while len(pila) > 0:
+                vertice = pila[(len(pila)-1)]
+                recorrido.append(vertice)
+                pila.pop()
+                for ady in self.grafo_dic[vertice]:
+                    if ady[0] in visitados:
+                        pass
+                    else:
+                        visitados.append(ady[0])
+                        pila.append(ady[0])
+            string = pformat(recorrido, width=40) 
+            return string
+
+        except KeyError:
+            return "El vértice inicial no fue encontrado"
+
+    def amplitud(self, ini_x, ini_y):
+        try:
+            vertice = (ini_x,ini_y)
+            visitados = []
+            pila = []
+            recorrido = []
+            visitados.append(vertice)
+            pila.append(vertice)
+
+            while len(pila) > 0:
+                vertice = pila[(len(pila)-1)]
+                recorrido.append(vertice)
+                pila.pop()
+
+                for ady in self.grafo_dic[vertice]:
+                    if ady[0] in visitados:
+                        pass
+                    else:
+                        visitados.append(ady[0])
+                        pila.insert(0, ady[0])
+            string = pformat(recorrido, width=40) 
+            return string
+        except KeyError:
+            return "El vertice inicial no fue encontrado"

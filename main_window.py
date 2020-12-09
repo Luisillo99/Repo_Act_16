@@ -30,10 +30,18 @@ class MainWindow(QMainWindow):
         self.ui.actionAbrir.triggered.connect(self.abrir_archivo)
         self.ui.actionGuardar.triggered.connect(self.guardar_archivo)
         self.ui.actionGrafo.triggered.connect(self.generar_grafo)
-
+        self.ui.actionRecorrido.triggered.connect(self.recorrido)
+        
         self.ui.id_checkbox.stateChanged.connect(self.ordenar_id)
         self.ui.velocidad_checkbox.stateChanged.connect(self.ordenar_vel)
         self.ui.distancia_checkbox.stateChanged.connect(self.ordenar_dis)
+    
+    def recorrido(self):
+        self.ui.plainTextEdit.clear()
+        self.ui.plainTextEdit.insertPlainText("Recorrido en Profundidad: \n")
+        self.ui.plainTextEdit.insertPlainText(self.organizador.profundidad(self.ui.origen_X.value(),self.ui.origen_y.value()))
+        self.ui.plainTextEdit.insertPlainText("\n\nRecorrido en Amplitud: \n")
+        self.ui.plainTextEdit.insertPlainText(self.organizador.amplitud(self.ui.origen_X.value(),self.ui.origen_y.value()))
 
     def generar_grafo(self):
         self.ui.plainTextEdit.clear()

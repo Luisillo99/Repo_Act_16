@@ -595,6 +595,7 @@
     <addaction name="actionAbrir"/>
     <addaction name="actionGuardar"/>
     <addaction name="actionGrafo"/>
+    <addaction name="actionRecorrido"/>
    </widget>
    <addaction name="menuAbrir"/>
   </widget>
@@ -614,13 +615,34 @@
    <property name="shortcut">
     <string>Ctrl+S</string>
    </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
   </action>
   <action name="actionGrafo">
    <property name="text">
-    <string>Mostrar como grafo</string>
+    <string>Generar grafo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="action_Amplitud">
+   <property name="text">
+    <string>en Amplitud</string>
+   </property>
+  </action>
+  <action name="action_Profundidad">
+   <property name="text">
+    <string>en Profundidad</string>
+   </property>
+  </action>
+  <action name="actionRecorrido">
+   <property name="text">
+    <string>Recorrido de grafo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>
